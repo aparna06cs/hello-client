@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello-client
+    service: hello-client
+  name: hello-client
+  namespace: dev2
+spec:
+  ports:
+    - name: tcp-8072-8072-hello-client
+      protocol: TCP
+      port: 8072
+      targetPort: 8072
+  selector:
+    app: hello-client
+  type: ClusterIP
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-client
+spec:
+  selector:
+    matchLabels:
+      app: hello-client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-client
+    spec:
+      containers:
+        - name: hello-client
+          image: gcr.io/t-operative-348503/hello-client:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8072
+          env:
+           - name: SPRING_PROFILES_ACTIVE
+             value: "dev2"

@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+         enabled : true
+      config:
+        enabled: true
+        sources:
+          - namespace: ${SPRING.PROFILES.ACTIVE}
+            name: configmap-application-common
+          - namespace: ${SPRING.PROFILES.ACTIVE}
+            name: configmap-application-${SPRING.PROFILES.ACTIVE}
+          - namespace: ${SPRING.PROFILES.ACTIVE}
+            name: configmap-coreservices-${SPRING.PROFILES.ACTIVE}
+      reload:
+        enabled: true
+        mode: event
+        strategy: refresh
+endpoints:
+  restart:
+    enabled: true
+polling:
+   fallback:
+      enabled: true
+   reload:
+      interval: 3000
