@@ -66,11 +66,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
-        <dependency>
+       <!--  <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-netflix</artifactId>
             <version>0.2.0.RELEASE</version>
-        </dependency>
+        </dependency> -->
 	</dependencies>
 
 	<dependencyManagement>
